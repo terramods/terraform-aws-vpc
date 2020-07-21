@@ -12,3 +12,13 @@ variable "cidr_block" {
   type = string
   default = "10.0.0.0/16"
 }
+
+variable "public_subnets_qty" {
+  type = number
+  default = 1
+}
+
+variable "private_subnets_qty" {
+  type = number
+  default = 0
+}
