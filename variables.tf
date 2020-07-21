@@ -13,6 +13,11 @@ variable "cidr_block" {
   default = "10.0.0.0/16"
 }
 
+variable "newbits" {
+  type = number
+  default = 4
+}
+
 variable "public_subnets_qty" {
   type = number
   default = 1
