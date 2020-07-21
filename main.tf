@@ -15,6 +15,11 @@ locals {
       cidrsubnet(var.cidr_block, var.newbits, public_subnet_index)
   ]
 
+  private_subnets_cidr_blocks = var.private_subnets_qty == 0 ? [] : [
+    for private_subnet_index in range(length(local.public_subnets_cidr_blocks), length(local.public_subnets_cidr_blocks) + var.private_subnets_qty):
+      cidrsubnet(var.cidr_block, var.newbits, private_subnet_index)
+  ]
+
   tm_tags = {
     Advisor = "Built using terramods project" 
   }
@@ -39,5 +44,16 @@ module "public_subnets" {
 
   vpc_id = aws_vpc.tm_vpc.id
   cidr_blocks = local.public_subnets_cidr_blocks
+  availability_zones = local.availability_zones
+}
+
+module "private_subnets" {
+  source = "git::git@github.com:terramods/terraform-aws-vpc-subnet.git"
+
+  aws_profile = var.aws_profile
+  aws_region = var.aws_region
+
+  vpc_id = aws_vpc.tm_vpc.id
+  cidr_blocks = local.private_subnets_cidr_blocks
   availability_zones = local.availability_zones
 }
