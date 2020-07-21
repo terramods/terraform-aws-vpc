@@ -34,6 +34,9 @@ resource "aws_vpc" "tm_vpc" {
 module "public_subnets" {
   source = "git::git@github.com:terramods/terraform-aws-vpc-subnet.git"
 
+  aws_profile = var.aws_profile
+  aws_region = var.aws_region
+
   vpc_id = aws_vpc.tm_vpc.id
   cidr_blocks = local.public_subnets_cidr_blocks
   availability_zones = local.availability_zones
