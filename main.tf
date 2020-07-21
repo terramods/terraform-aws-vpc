@@ -7,14 +7,18 @@ terraform {
 }
 
 locals {
-  tm_tags = {}
+  tm_tags = {
+    Advisor = "Built using terramods project" 
+  }
 }
 
 resource "aws_vpc" "tm_vpc" {
   cidr_block            = var.cidr_block
 
   tags = merge(
-    {},
+    {
+      Name = "test-vpc"
+    },
     local.tm_tags
   )
 }
