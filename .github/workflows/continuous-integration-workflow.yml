@@ -1,0 +1,12 @@
+name: Greet Everyone
+on: 
+  push:
+    branches:
+      - ci-pipeline
+jobs:
+  pre:
+    name: Preparing environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello World
+        uses: actions/checkout@v2
