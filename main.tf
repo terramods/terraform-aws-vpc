@@ -10,15 +10,15 @@ terraform {
 locals {
   availability_zones = length(data.aws_availability_zones.available.names) > var.public_subnets_qty ? slice(data.aws_availability_zones.available.names, 0, var.public_subnets_qty) : data.aws_availability_zones.available.names
 
-  public_subnets_cidr_blocks = var.public_subnets_qty == 0 ? [] : [
-    for public_subnet_index in range(var.public_subnets_qty):
-      cidrsubnet(var.cidr_block, var.newbits, public_subnet_index)
-  ]
+#  public_subnets_cidr_blocks = var.public_subnets_qty == 0 ? [] : [
+#    for public_subnet_index in range(var.public_subnets_qty):
+#      cidrsubnet(var.cidr_block, var.newbits, public_subnet_index)
+#  ]
 
-  private_subnets_cidr_blocks = var.private_subnets_qty == 0 ? [] : [
-    for private_subnet_index in range(length(local.public_subnets_cidr_blocks), length(local.public_subnets_cidr_blocks) + var.private_subnets_qty):
-      cidrsubnet(var.cidr_block, var.newbits, private_subnet_index)
-  ]
+#  private_subnets_cidr_blocks = var.private_subnets_qty == 0 ? [] : [
+#    for private_subnet_index in range(length(local.public_subnets_cidr_blocks), length(local.public_subnets_cidr_blocks) + var.private_subnets_qty):
+#      cidrsubnet(var.cidr_block, var.newbits, private_subnet_index)
+#  ]
 
   tm_tags = {
     Advisor = "Built using terramods project" 
