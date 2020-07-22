@@ -20,9 +20,9 @@ variable "newbits" {
 
 variable "subnets" {
   type = list(
-    object(
+    object({
       kind = string
       qty = number
-    )
+    })
   )
 }
