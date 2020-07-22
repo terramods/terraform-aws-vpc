@@ -18,12 +18,11 @@ variable "newbits" {
   default = 4
 }
 
-variable "public_subnets_qty" {
-  type = number
-  default = 1
-}
-
-variable "private_subnets_qty" {
-  type = number
-  default = 0
+variable "subnets" {
+  type = list(
+    object(
+      kind = string
+      qty = number
+    )
+  )
 }
